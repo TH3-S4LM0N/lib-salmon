@@ -8,8 +8,7 @@ use std::{
 pub fn append<P, S>(file: P, contents: S)
 -> Result<()>
 where
-    P: AsRef<Path>,
-    S: AsRef<String> + Display
+    P: AsRef<Path>
 {
     let filer = OpenOptions::new()
                 .append(true)

@@ -1,12 +1,30 @@
-#[macro_export]
-macro_rules! append {
-    ($f:expr, $c:expr) => {
-        let mut file = OpenOptions::new()
+use std::{
+    io::{Result, Write},
+    path::Path,
+    fmt::Display,
+    fs::OpenOptions
+};
+
+pub fn append<P, S>(file: P, contents: S)
+-> Result<()>
+where
+    P: AsRef<Path>,
+    S: AsRef<String> + Display
+{
+    let filer = OpenOptions::new()
                 .append(true)
                 .write(true)
                 .create(true)
-                .open($f)
-                .expect("Failed to open $f with: append, write, and create");
-        writeln!(file, $c);
-    }
+                .open(file);
+    let mut file = match filer {
+        Ok(f) => f,
+        Err(e) => return Err(e)
+    };
+
+
+    let _ = match writeln!(file, "{contents}") {
+        Ok(_) => (),
+        Err(e) => return Err(e)
+    };
+    Ok(())
 }

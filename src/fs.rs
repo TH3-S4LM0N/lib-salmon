@@ -1,3 +1,4 @@
+#[macro_export]
 macro_rules! append {
     ($f:expr, $c:expr) => {
         let mut file = OpenOptions::new()

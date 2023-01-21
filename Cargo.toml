@@ -7,6 +7,9 @@ edition = "2021"
 
 [features]
 logger = ["dep:chrono"]
+diff = []
+fs = []
+all = ["logger", "diff", "fs"]
 
 [dependencies]
 chrono = { version = "*", optional = true }

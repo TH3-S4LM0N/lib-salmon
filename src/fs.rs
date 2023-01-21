@@ -5,7 +5,7 @@ use std::{
     fs::OpenOptions
 };
 
-pub fn append<P, S>(file: P, contents: S)
+pub fn append<P>(file: P, contents: &str)
 -> Result<()>
 where
     P: AsRef<Path>
